@@ -1,4 +1,39 @@
-.App {
-  font-family: sans-serif;
-  text-align: center;
+@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;700;900&display=swap");
+
+* {
+  box-sizing: none;
+  margin: 0;
+  padding: 0;
+  line-height: 1.2;
+  font-family: "Nunito Sans", sans-serif;
+  color: #202030;
+}
+
+header {
+  display: flex;
+  align-items: flex-end;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  padding: 0.75rem;
+  margin-bottom: 1.5rem;
+  border-bottom: 0.1rem solid #dbdde1;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+}
+
+h1 {
+  font-weight: 900;
+  font-size: 1.5rem;
+}
+
+h2 {
+  font-weight: 700;
+  font-size: 1.125rem;
+}
+
+.small {
+  font-size: 0.875rem;
 }
