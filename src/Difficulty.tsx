@@ -2,12 +2,12 @@ import { FC } from "react";
 import styled from "styled-components";
 
 interface difficultyProps {
-  children: string;
-  level: string;
-  selectDifficulty: (level: string) => void;
+  readonly className?: string;
+  readonly level: "easy" | "medium" | "hard";
+  selectDifficulty(diff: string): void;
 }
 
-const DiffButton = styled.button<difficultyProps>`
+const DiffButton = styled.button`
   border-style: none;
   border-radius: 50%;
   color: white;
@@ -17,19 +17,16 @@ const DiffButton = styled.button<difficultyProps>`
   font-size: 1.5rem;
   font-weight: 700;
   cursor: pointer;
-  background-color: ${({ children }) => {
-    switch (children) {
-      case "Easy":
+  background-color: ${(props: difficultyProps) => {
+    switch (props.level) {
+      case "easy":
         return "#4AB078";
-      case "Medium":
+      case "medium":
         return "#EEA246";
-      case "Hard":
+      case "hard":
         return "#E34C1A";
     }
   }};
-
-  &:hover {
-  }
 `;
 
 const Difficulty: FC<difficultyProps> = ({
@@ -38,7 +35,13 @@ const Difficulty: FC<difficultyProps> = ({
   selectDifficulty
 }) => {
   return (
-    <DiffButton onClick={() => selectDifficulty(level)}>{children}</DiffButton>
+    <DiffButton
+      onClick={() => selectDifficulty(level)}
+      level={level}
+      selectDifficulty={selectDifficulty}
+    >
+      {children}
+    </DiffButton>
   );
 };
 
