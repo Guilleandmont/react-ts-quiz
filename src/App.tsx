@@ -17,6 +17,12 @@ export default function App() {
     console.log("cool");
   }
 
+  function startGame(difficulty: string) {
+    fetchQuestions(difficulty);
+    setScore(0);
+    setCurrentQuestion(0);
+  }
+
   return (
     <Router>
       <Switch>
@@ -29,7 +35,7 @@ export default function App() {
           />
         </Route>
         <Route path="/">
-          <Home fetchQuestions={fetchQuestions} />
+          <Home startGame={startGame} />
         </Route>
       </Switch>
     </Router>

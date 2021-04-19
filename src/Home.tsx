@@ -3,10 +3,10 @@ import { Link } from "react-router-dom";
 import { FC } from "react";
 
 interface homeProps {
-  fetchQuestions(diff: string): void;
+  startGame(diff: string): void;
 }
 
-const Home: FC<homeProps> = ({ fetchQuestions }) => {
+const Home: FC<homeProps> = ({ startGame }) => {
   return (
     <>
       <header>
@@ -17,22 +17,20 @@ const Home: FC<homeProps> = ({ fetchQuestions }) => {
         <h2>Select a difficulty</h2>
         <div className="home">
           <Link to="/questions">
-            <Difficulty selectDifficulty={fetchQuestions} level={"easy"}>
+            <Difficulty selectDifficulty={startGame} level={"easy"}>
               Easy
             </Difficulty>
           </Link>
-          <Difficulty
-            selectDifficulty={() => console.log("cool")}
-            level={"medium"}
-          >
-            Medium
-          </Difficulty>
-          <Difficulty
-            selectDifficulty={() => console.log("cool")}
-            level={"hard"}
-          >
-            Hard
-          </Difficulty>
+          <Link to="/questions">
+            <Difficulty selectDifficulty={startGame} level={"medium"}>
+              Medium
+            </Difficulty>
+          </Link>
+          <Link to="/questions">
+            <Difficulty selectDifficulty={startGame} level={"hard"}>
+              Hard
+            </Difficulty>
+          </Link>
         </div>
       </main>
     </>

@@ -1,4 +1,5 @@
 import { FC, SetStateAction, Dispatch } from "react";
+import { decodeHtml } from "./helpers";
 
 interface questionProps {
   currentQuestion: {
@@ -19,13 +20,11 @@ const Questions: FC<questionProps> = ({ currentQuestion, questionNumber }) => {
   return (
     <>
       <h2>Question {questionNumber + 1}</h2>
-      <h2>{currentQuestion ? currentQuestion.question : "Loading Question"}</h2>
-      <div className="questions-container">
-        <div className="question">Option 1</div>
-        <div className="question">Option 1</div>
-        <div className="question">Option 1</div>
-        <div className="question">Option 1</div>
-      </div>
+      <h2>
+        {currentQuestion
+          ? decodeHtml(currentQuestion.question)
+          : "Loading Question"}
+      </h2>
     </>
   );
 };
