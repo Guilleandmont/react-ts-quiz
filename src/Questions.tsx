@@ -1,5 +1,6 @@
 import { FC, SetStateAction, Dispatch } from "react";
 import { decodeHtml } from "./helpers";
+import Answers from "./Answers";
 
 interface questionProps {
   currentQuestion: {
@@ -25,6 +26,7 @@ const Questions: FC<questionProps> = ({ currentQuestion, questionNumber }) => {
           ? decodeHtml(currentQuestion.question)
           : "Loading Question"}
       </h2>
+      <Answers />
     </>
   );
 };
