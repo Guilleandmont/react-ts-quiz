@@ -1,6 +1,12 @@
 import Difficulty from "./Difficulty";
+import { Link } from "react-router-dom";
+import { FC } from "react";
 
-const Home = () => {
+interface homeProps {
+  fetchQuestions(diff: string): void;
+}
+
+const Home: FC<homeProps> = ({ fetchQuestions }) => {
   return (
     <>
       <header>
@@ -9,18 +15,25 @@ const Home = () => {
       </header>
       <main>
         <h2>Select a difficulty</h2>
-        <Difficulty selectDifficulty={() => console.log("cool")} level={"easy"}>
-          Easy
-        </Difficulty>
-        <Difficulty
-          selectDifficulty={() => console.log("cool")}
-          level={"medium"}
-        >
-          Medium
-        </Difficulty>
-        <Difficulty selectDifficulty={() => console.log("cool")} level={"hard"}>
-          Hard
-        </Difficulty>
+        <div className="home">
+          <Link to="/questions">
+            <Difficulty selectDifficulty={fetchQuestions} level={"easy"}>
+              Easy
+            </Difficulty>
+          </Link>
+          <Difficulty
+            selectDifficulty={() => console.log("cool")}
+            level={"medium"}
+          >
+            Medium
+          </Difficulty>
+          <Difficulty
+            selectDifficulty={() => console.log("cool")}
+            level={"hard"}
+          >
+            Hard
+          </Difficulty>
+        </div>
       </main>
     </>
   );

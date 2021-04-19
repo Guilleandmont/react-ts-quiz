@@ -1,22 +1,24 @@
 import { FC } from "react";
 import styled from "styled-components";
 
+//Props type definition
 interface difficultyProps {
   readonly className?: string;
   readonly level: "easy" | "medium" | "hard";
   selectDifficulty(diff: string): void;
 }
 
+//Style
 const DiffButton = styled.button`
   border-style: none;
   border-radius: 50%;
   color: white;
   width: 8rem;
   height: 8rem;
-  margin-bottom: 2rem;
   font-size: 1.5rem;
   font-weight: 700;
   cursor: pointer;
+  transition: all 0.5s ease;
   background-color: ${(props: difficultyProps) => {
     switch (props.level) {
       case "easy":
@@ -27,8 +29,13 @@ const DiffButton = styled.button`
         return "#E34C1A";
     }
   }};
+
+  &:active {
+    background-color: #202030;
+  }
 `;
 
+//Define component
 const Difficulty: FC<difficultyProps> = ({
   children,
   level,
