@@ -1,9 +1,15 @@
-import { useState, FC } from "react";
+import { FC } from "react";
 import styled from "styled-components";
 
+type options =
+  | {
+      correct: string;
+      incorrect: string[];
+    }
+  | undefined;
+
 interface answersProps {
-  isCorrect: boolean;
-  body: string;
+  options?: options;
 }
 
 const Answer = styled.div`
@@ -18,15 +24,19 @@ const Answer = styled.div`
   background-color: #f6f6f5;
 `;
 
-const Answers: FC<answersProps> = ({ isCorrect, body }) => {
-  const [active, setActive] = useState(false);
+const Answers: FC<answersProps> = ({ options }) => {
+  const arr = [0, 1, 2, 3];
+  function displayAnswers(options: options, arr: number[]) {
+    if (options?.incorrect)
+      return options.incorrect[Math.floor(Math.random() * 3)];
+  }
 
   return (
     <div className="questions-container">
-      <Answer>Option 1</Answer>
-      <Answer>Option 2</Answer>
-      <Answer>Option 3</Answer>
-      <Answer>Option 4</Answer>
+      <Answer>{displayAnswers(options, arr)}</Answer>
+      <Answer>{displayAnswers(options, arr)}</Answer>
+      <Answer>{displayAnswers(options, arr)}</Answer>
+      <Answer>{displayAnswers(options, arr)}</Answer>
     </div>
   );
 };
