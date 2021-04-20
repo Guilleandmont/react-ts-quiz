@@ -1,12 +1,7 @@
 import { FC } from "react";
 import styled from "styled-components";
 
-type options =
-  | {
-      correct: string;
-      incorrect: string[];
-    }
-  | undefined;
+type options = string[] | undefined;
 
 interface answersProps {
   options?: options;
@@ -25,20 +20,20 @@ const Answer = styled.div`
 `;
 
 const Answers: FC<answersProps> = ({ options }) => {
-  const arr = [0, 1, 2, 3];
-  function displayAnswers(options: options, arr: number[]) {
-    if (options?.incorrect)
-      return options.incorrect[Math.floor(Math.random() * 3)];
-  }
+  // Durstenfeld shuffle by Laurens Holst from Stackoverflow
 
   return (
     <div className="questions-container">
-      <Answer>{displayAnswers(options, arr)}</Answer>
-      <Answer>{displayAnswers(options, arr)}</Answer>
-      <Answer>{displayAnswers(options, arr)}</Answer>
-      <Answer>{displayAnswers(options, arr)}</Answer>
+      <Answer>{options ? options[0] : "loading"}</Answer>
+      <Answer>{options ? options[1] : "loading"}</Answer>
+      <Answer>{options ? options[2] : "loading"}</Answer>
+      <Answer>{options ? options[3] : "loading"}</Answer>
     </div>
   );
 };
 
 export default Answers;
+
+const arr = [0, 1, 2, 3, 4];
+const randomArr = arr.sort((a, b) => 0.5 - Math.random());
+console.log(randomArr);

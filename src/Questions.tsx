@@ -19,10 +19,24 @@ interface questionProps {
 }
 
 const Questions: FC<questionProps> = ({ currentQuestion, questionNumber }) => {
-  const options = {
-    correct: currentQuestion?.correct_answer,
-    incorrect: currentQuestion?.incorrect_answers
+  //Algorithm to shuffle array. Thanks to https://gist.github.com/nikolas/96586a0b56f53eabfd6fe4ed59fecb98
+  const shuffleArray = function (array: string[]) {
+    const a = array.slice();
+    for (let i = a.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
   };
+
+  console.log(currentQuestion?.correct_answer);
+
+  const options = currentQuestion
+    ? shuffleArray(
+        currentQuestion.incorrect_answers.concat(currentQuestion.correct_answer)
+      )
+    : undefined;
+
   return (
     <>
       <h2>Question {questionNumber + 1}</h2>
@@ -31,7 +45,7 @@ const Questions: FC<questionProps> = ({ currentQuestion, questionNumber }) => {
           ? decodeHtml(currentQuestion.question)
           : "Loading Question"}
       </h2>
-      <Answers options={options} />
+      <Answers options={options ? options : undefined} />
     </>
   );
 };
