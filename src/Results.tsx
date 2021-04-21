@@ -23,9 +23,11 @@ const Restart = styled.div`
 
 const Results: FC<resultProps> = ({ score }) => {
   return (
-    <div className="results-container">
-      <div className="congrats-text">Good Job!</div>
-      <div className="score-text">You got {score} / 10 right.</div>
+    <div className="results">
+      <div className="results-container">
+        <div className="congrats-text">Good Job!</div>
+        <div className="score-text">You got {score} / 10 right.</div>
+      </div>
       <Link to="/">
         <Restart className="restart-btn">Try again</Restart>
       </Link>

@@ -1,4 +1,5 @@
 import { FC, Dispatch, SetStateAction } from "react";
+import { decodeHtml } from "./helpers";
 import styled from "styled-components";
 
 //Type definitions
@@ -48,7 +49,7 @@ const Answers: FC<answersProps> = ({
       {options ? (
         options.map((item, index) => (
           <Answer onClick={() => checkAnswer(item)} key={`answer${index}`}>
-            {item}
+            {decodeHtml(item)}
           </Answer>
         ))
       ) : (
