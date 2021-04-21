@@ -1,13 +1,17 @@
-import { FC } from "react";
+import { FC, Dispatch, SetStateAction } from "react";
 import styled from "styled-components";
 
+//Type definitions
 type options = string[] | undefined;
 
 interface answersProps {
   options?: options;
   correctAnswer?: string;
+  setScore: Dispatch<SetStateAction<number>>;
+  setCurrentQuestion: Dispatch<SetStateAction<number>>;
 }
 
+//Styled component
 const Answer = styled.div`
   display: flex;
   align-items: center;
@@ -20,18 +24,22 @@ const Answer = styled.div`
   background-color: #f6f6f5;
 `;
 
-const Answers: FC<answersProps> = ({ options, correctAnswer }) => {
+const Answers: FC<answersProps> = ({
+  options,
+  correctAnswer,
+  setScore,
+  setCurrentQuestion
+}) => {
   const checkAnswer = (answer: string): void => {
     //Prevents from crashing if the button is pressed before the question has loaded
     if (!correctAnswer) {
       return;
     }
     if (answer === correctAnswer) {
-      console.log("correct!");
-      //set state score to + 1
-      //set current question to + 1
+      setScore((prev) => prev + 1);
+      setCurrentQuestion((prev) => prev + 1);
     } else {
-      //set current question to + 1
+      setCurrentQuestion((prev) => prev + 1);
     }
   };
 

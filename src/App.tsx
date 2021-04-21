@@ -1,8 +1,9 @@
 import "./styles.css";
 import { Switch, BrowserRouter as Router, Route } from "react-router-dom";
+import { useState } from "react";
 import Home from "./Home";
 import Questions from "./Questions";
-import { useState } from "react";
+import Results from "./Results";
 
 export default function App() {
   const [questions, setQuestions] = useState([]);
@@ -18,6 +19,7 @@ export default function App() {
   }
 
   function startGame(difficulty: string) {
+    setQuestions([]);
     fetchQuestions(difficulty);
     setScore(0);
     setCurrentQuestion(0);
@@ -27,12 +29,16 @@ export default function App() {
     <Router>
       <Switch>
         <Route path="/questions">
-          <Questions
-            currentQuestion={questions[currentQuestion]}
-            setScore={setScore}
-            setCurrentQuestion={setCurrentQuestion}
-            questionNumber={currentQuestion}
-          />
+          {currentQuestion < 10 ? (
+            <Questions
+              currentQuestion={questions[currentQuestion]}
+              setScore={setScore}
+              setCurrentQuestion={setCurrentQuestion}
+              questionNumber={currentQuestion}
+            />
+          ) : (
+            <Results score={score} />
+          )}
         </Route>
         <Route path="/">
           <Home startGame={startGame} />

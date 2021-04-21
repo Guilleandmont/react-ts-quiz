@@ -2,6 +2,7 @@ import { FC, SetStateAction, Dispatch } from "react";
 import { decodeHtml, shuffleArray } from "./helpers";
 import Answers from "./Answers";
 
+//Type definitions
 type questionObj = {
   category: string;
   type: string;
@@ -18,7 +19,13 @@ interface questionProps {
   questionNumber: number;
 }
 
-const Questions: FC<questionProps> = ({ currentQuestion, questionNumber }) => {
+//Component
+const Questions: FC<questionProps> = ({
+  currentQuestion,
+  questionNumber,
+  setScore,
+  setCurrentQuestion
+}) => {
   const correctAnswer = currentQuestion?.correct_answer;
 
   const options = currentQuestion
@@ -38,6 +45,8 @@ const Questions: FC<questionProps> = ({ currentQuestion, questionNumber }) => {
       <Answers
         options={options ? options : undefined}
         correctAnswer={correctAnswer}
+        setScore={setScore}
+        setCurrentQuestion={setCurrentQuestion}
       />
     </>
   );
