@@ -5,6 +5,7 @@ type options = string[] | undefined;
 
 interface answersProps {
   options?: options;
+  correctAnswer?: string;
 }
 
 const Answer = styled.div`
@@ -19,21 +20,34 @@ const Answer = styled.div`
   background-color: #f6f6f5;
 `;
 
-const Answers: FC<answersProps> = ({ options }) => {
-  // Durstenfeld shuffle by Laurens Holst from Stackoverflow
+const Answers: FC<answersProps> = ({ options, correctAnswer }) => {
+  const checkAnswer = (answer: string): void => {
+    //Prevents from crashing if the button is pressed before the question has loaded
+    if (!correctAnswer) {
+      return;
+    }
+    if (answer === correctAnswer) {
+      console.log("correct!");
+      //set state score to + 1
+      //set current question to + 1
+    } else {
+      //set current question to + 1
+    }
+  };
 
   return (
     <div className="questions-container">
-      <Answer>{options ? options[0] : "loading"}</Answer>
-      <Answer>{options ? options[1] : "loading"}</Answer>
-      <Answer>{options ? options[2] : "loading"}</Answer>
-      <Answer>{options ? options[3] : "loading"}</Answer>
+      {options ? (
+        options.map((item, index) => (
+          <Answer onClick={() => checkAnswer(item)} key={`answer${index}`}>
+            {item}
+          </Answer>
+        ))
+      ) : (
+        <Answer>loading</Answer>
+      )}
     </div>
   );
 };
 
 export default Answers;
-
-const arr = [0, 1, 2, 3, 4];
-const randomArr = arr.sort((a, b) => 0.5 - Math.random());
-console.log(randomArr);

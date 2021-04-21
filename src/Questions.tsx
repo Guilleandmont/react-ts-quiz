@@ -1,5 +1,5 @@
 import { FC, SetStateAction, Dispatch } from "react";
-import { decodeHtml } from "./helpers";
+import { decodeHtml, shuffleArray } from "./helpers";
 import Answers from "./Answers";
 
 type questionObj = {
@@ -19,17 +19,7 @@ interface questionProps {
 }
 
 const Questions: FC<questionProps> = ({ currentQuestion, questionNumber }) => {
-  //Algorithm to shuffle array. Thanks to https://gist.github.com/nikolas/96586a0b56f53eabfd6fe4ed59fecb98
-  const shuffleArray = function (array: string[]) {
-    const a = array.slice();
-    for (let i = a.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [a[i], a[j]] = [a[j], a[i]];
-    }
-    return a;
-  };
-
-  console.log(currentQuestion?.correct_answer);
+  const correctAnswer = currentQuestion?.correct_answer;
 
   const options = currentQuestion
     ? shuffleArray(
@@ -45,7 +35,10 @@ const Questions: FC<questionProps> = ({ currentQuestion, questionNumber }) => {
           ? decodeHtml(currentQuestion.question)
           : "Loading Question"}
       </h2>
-      <Answers options={options ? options : undefined} />
+      <Answers
+        options={options ? options : undefined}
+        correctAnswer={correctAnswer}
+      />
     </>
   );
 };
