@@ -1,4 +1,4 @@
-import { FC, Dispatch, SetStateAction } from "react";
+import { FC, Dispatch, SetStateAction, useState } from "react";
 import { decodeHtml } from "./helpers";
 import styled from "styled-components";
 
@@ -22,7 +22,7 @@ const Answer = styled.div`
   padding-left: 1.5rem;
   border-radius: 1.2rem;
   cursor: pointer;
-  background-color: #f6f6f5;
+  transition: all 0.25s ease;
 `;
 
 const Answers: FC<answersProps> = ({
@@ -31,24 +31,46 @@ const Answers: FC<answersProps> = ({
   setScore,
   setCurrentQuestion
 }) => {
-  const checkAnswer = (answer: string): void => {
+  const [isActive, setActive] = useState(false);
+
+  const isAnswer = (answer: string): boolean => {
+    if (answer === correctAnswer) {
+      return true;
+    } else return false;
+  };
+
+  const handleAnswer = (answer: string): void => {
     //Prevents from crashing if the button is pressed before the question has loaded
-    if (!correctAnswer) {
+    if (!isAnswer) {
       return;
     }
-    if (answer === correctAnswer) {
-      setScore((prev) => prev + 1);
-      setCurrentQuestion((prev) => prev + 1);
-    } else {
-      setCurrentQuestion((prev) => prev + 1);
-    }
+    setActive(true);
+    setTimeout(() => {
+      if (isAnswer(answer)) {
+        setScore((prev) => prev + 1);
+        setCurrentQuestion((prev) => prev + 1);
+      } else {
+        setCurrentQuestion((prev) => prev + 1);
+      }
+      setActive(false);
+    }, 2000);
   };
 
   return (
     <div className="questions-container">
       {options ? (
         options.map((item, index) => (
-          <Answer onClick={() => checkAnswer(item)} key={`answer${index}`}>
+          <Answer
+            onClick={() => handleAnswer(item)}
+            key={`answer${index}`}
+            style={{
+              backgroundColor: isActive
+                ? isAnswer(item)
+                  ? "#4AB078"
+                  : "f6f6f5"
+                : "#f6f6f5"
+            }}
+          >
             {decodeHtml(item)}
           </Answer>
         ))
