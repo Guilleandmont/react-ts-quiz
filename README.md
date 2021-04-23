@@ -4,4 +4,4 @@ A quiz made with React, Typescript, React Router and Styled Components. Based on
 
 ---
 
-Try it out at (Codesandbox)[https://wgfcp.csb.app/]. Any feedback and suggestions are welcome!
+Try it out at [Codesandbox](https://wgfcp.csb.app/). Any feedback and suggestions are welcome!
