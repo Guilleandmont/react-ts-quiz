@@ -9,6 +9,7 @@
             "dom",
             "es2015"
         ],
+        "noFallthroughCasesInSwitch": true,
         "jsx": "react-jsx"
     }
 }
