@@ -3,13 +3,12 @@
         "./src/**/*"
     ],
     "compilerOptions": {
-        "strict": false,
+        "strict": true,
         "esModuleInterop": true,
         "lib": [
             "dom",
             "es2015"
         ],
-        "noFallthroughCasesInSwitch": true,
         "jsx": "react-jsx"
     }
 }
